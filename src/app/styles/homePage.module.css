@@ -1,0 +1,113 @@
+/* Genel Sayfa Konteyneri */
+.pageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f3f4f6; /* Arka plan rengi */
+    font-family: 'Arial', sans-serif;
+    color: #333;
+  }
+  
+  /* Hoşgeldiniz Ekranı */
+  .welcomeScreen {
+    text-align: center;
+    background-color: #fef9c3;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 3s ease-in-out;
+  }
+  
+  .welcomeScreen h1 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+  }
+  
+  .welcomeScreen p {
+    font-size: 1.2rem;
+  }
+  
+  /* Ana İçerik */
+  .mainContent {
+    display: none;
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  .mainContent h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+  
+  .services {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  /* Kart Stilleri */
+  .cardContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .card {
+    width: 250px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .cardImage {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 15px;
+  }
+  
+  .card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .card p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 15px;
+  }
+  
+  .cardButton {
+    padding: 10px 20px;
+    background-color: #4f46e5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .cardButton:hover {
+    background-color: #3b3a99;
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  

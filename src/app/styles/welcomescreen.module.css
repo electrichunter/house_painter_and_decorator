@@ -1,0 +1,60 @@
+:root {
+  --main-color: #4f46e5;
+  --text-color: rgb(0, 0, 0);
+  --background-color: #ffffff;
+}
+
+.welcomeContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  padding: 2rem;
+  z-index: 9999; /* En üstte kalacak */
+  transition: opacity 1s ease-in-out; /* Fade-out efekti */
+}
+
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.text {
+  font-size: 3rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  flex: 1;
+  text-align: right; /* Sağda hizalı */
+}
+
+.painter {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.painterImage {
+  width: 60%;
+  height: auto;
+  animation: movePainter 3s ease-in-out infinite;
+}
+
+@keyframes movePainter {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(50px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
