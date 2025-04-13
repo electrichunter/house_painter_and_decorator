@@ -3,32 +3,35 @@
 import React, { useEffect, useState } from "react";
 import styles from "../styles/welcomescreen.module.css";
 import Image from "next/image";
-import decorators from "../../../public/decorationers.jpg"; // Import the image
-const WelcomeScreen: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(true);
+import decorators from "../../../public/decorationers.jpg";
 
-  // Bu useEffect ile 3 saniye sonra 'Hoşgeldiniz' ekranını kaldıracağız
+const WelcomeScreen: React.FC = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVisible(false);
-    }, 2500); // 3 saniye sonra kapanacak
-    return () => clearTimeout(timer); // Temizleme işlemi
+    const alreadyVisited = localStorage.getItem("visitedWelcome");
+
+    if (!alreadyVisited) {
+      setIsVisible(true);
+      localStorage.setItem("visitedWelcome", "true");
+
+      const timer = setTimeout(() => {
+        setIsVisible(false);
+      }, 2500);
+
+      return () => clearTimeout(timer);
+    }
   }, []);
 
+  if (!isVisible) return null;
+
   return (
-    <div
-      className={`${styles.welcomeContainer} ${!isVisible ? styles.hidden : ""}`}
-    >
+    <div className={styles.welcomeContainer}>
       <div className={styles.text}>
         <h1>Hoşgeldiniz</h1>
       </div>
       <div className={styles.painter}>
-        < Image
-          // Boyacıyı temsil eden resim
-          src={decorators} // Boyacıyı temsil eden resim
-          alt="Boyacı"
-          className={styles.painterImage}
-        />
+        <Image src={decorators} alt="Boyacı" className={styles.painterImage} />
       </div>
     </div>
   );

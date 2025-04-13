@@ -20,7 +20,7 @@ export default function HeroSection() {
             Profesyonel boya ustalarımızla evinizi yeniliyoruz. İç ve dış cephe boyama, dekoratif dokunuşlar ve ücretsiz keşif hizmetimizle yanınızdayız.
           </p>
           <a
-            href="#contact"
+            href="contact"
             className="inline-block bg-blue-400 text-white font-semibold px-4 sm:px-6 py-2 sm:py-3 rounded-2xl shadow-lg hover:bg-blue-500 transition"
           >
             Ücretsiz Keşif Talep Et
