@@ -32,7 +32,7 @@ export default function Auth() {
     if (isSignup) payload.name = form.name;
 
     try {
-      const res = await fetch('/api/login/register', {
+      const res = await fetch('/api/login/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
