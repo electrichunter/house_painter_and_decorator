@@ -21,30 +21,24 @@ const Profile: React.FC = () => {
     }
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    window.location.href = "/login";
-  };
-
   const handleUpdate = async () => {
+    if (!file) return; // Dosya yoksa işlem yapılmasın
+
+    const formData = new FormData();
+    formData.append("image", file);
+
     try {
-      // Eğer yeni bir resim seçildiyse, önce resmi yükle
-      if (file) {
-        const formData = new FormData();
-        formData.append("image", file);
+      const uploadResponse = await fetch(`/api/upload/${user.id}`, {
+        method: "POST",
+        body: formData,
+      });
 
-        const uploadResponse = await fetch(`/api/upload/${user.id}`, { // Corrected route
-          method: "POST",
-          body: formData,
-        });
-
-        const uploadData = await uploadResponse.json();
-        if (uploadData.success) {
-          setImg(uploadData.imgUrl); // Yeni resmin URL'sini alıp state'e ekliyoruz
-        } else {
-          setMessage(uploadData.error || "Resim yüklenirken hata oluştu");
-          return;
-        }
+      const uploadData = await uploadResponse.json();
+      if (uploadData.success) {
+        setImg(uploadData.imgUrl); // Yeni resmin URL'sini alıp state'e ekliyoruz
+      } else {
+        setMessage(uploadData.error || "Resim yüklenirken hata oluştu");
+        return;
       }
 
       // Profil bilgilerini güncelle
@@ -55,14 +49,14 @@ const Profile: React.FC = () => {
           id: user.id,
           name,
           email,
-          img: img || "/default-avatar.jpg", // Varsayılan resim yolu
+          img: uploadData.imgUrl || "/default-avatar.jpg", // Varsayılan resim yolu
         }),
       });
 
       const data = await response.json();
       if (data.success) {
         setMessage("Profil başarıyla güncellendi");
-        const updatedUser = { ...user, name, email, img };
+        const updatedUser = { ...user, name, email, img: uploadData.imgUrl || "/default-avatar.jpg" };
         localStorage.setItem("user", JSON.stringify(updatedUser));
         setUser(updatedUser);
       } else {
@@ -77,6 +71,11 @@ const Profile: React.FC = () => {
     if (e.target.files && e.target.files[0]) {
       setFile(e.target.files[0]); // Kullanıcı dosyasını state'e alıyoruz
     }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setUser(null);
   };
 
   if (!user) return <div className="text-center mt-10 text-gray-600">Yükleniyor...</div>;
@@ -101,7 +100,7 @@ const Profile: React.FC = () => {
             className="w-full mt-1 px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-400"
           />
         </label>
-
+       
         <label className="block">
           <span className="text-gray-700">E-posta</span>
           <input
